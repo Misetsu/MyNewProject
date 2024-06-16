@@ -16,6 +16,7 @@ export default class HelloWorldApp extends Component {  //コンポーネント�
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
         <Text>Hello, world!</Text>
         <Text>タンクトップマスター</Text>
+        <Text>お試し追加ですよ！！</Text>
       </View>
     );
     //<View>はReact Nativeでのレイアウトコンポーネント
