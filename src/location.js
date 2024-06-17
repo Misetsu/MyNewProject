@@ -1,10 +1,15 @@
-import Geolocation, {GeolocationResponse} from 'react-native-geolocation-service';
+import Geolocation, {
+  GeolocationResponse,
+} from 'react-native-geolocation-service';
 
 export const CurrentPosition = () => {
-  const [location, setLocation] = useState<GeolocationResponse['coords']>({
-    latitude: 0,
-    longitude: 0
-  });
+  const [location, setLocation] =
+    useState <
+    GeolocationResponse['coords'] >
+    {
+      latitude: 0,
+      longitude: 0,
+    };
 
   useEffect(() => {
     Geolocation.getCurrentPosition(
@@ -14,7 +19,5 @@ export const CurrentPosition = () => {
     );
   }, []);
 
-  return (
-    location
-  )
-}
+  return location;
+};
