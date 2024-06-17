@@ -65,33 +65,6 @@ export default class Map extends Component {
     Geolocation.clearWatch(this.watchId)
   }
 
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     latitude: 0, // 追加: 緯度の状態を保持する
-  //     longitude: 0, // 追加: 経度の状態を保持する
-  //     error: null, // 追加: エラーの状態を保持する
-  //   };
-  // }
-
-  // handlePress = () => {
-  //   if (Geolocation) {
-  //     Geolocation.getCurrentPosition(this.successCallback, this.errorCallback);
-  //   } else {
-  //     console.error('Geolocation is not supported by this browser/device.');
-  //   }
-  // };
-
-  // successCallback = position => {
-  //   const latitude = position.coords.latitude;
-  //   const longitude = position.coords.longitude;
-  //   this.setState({
-  //     latitude: latitude,
-  //     longitude: longitude,
-  //     data: `緯度: ${latitude}, 経度: ${longitude}`,
-  //   });
-  // };
-
   render() {
     return (
       <View
