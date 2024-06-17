@@ -1,7 +1,15 @@
 import React, {useState, useEffect, Component} from 'react';
-import {View, StyleSheet, Button, Text} from 'react-native';
+import {View, StyleSheet, Button, Text, Dimensions} from 'react-native';
 import MapView, {PROVIDER_GOOGLE, Marker} from 'react-native-maps';
 import Geolocation from '@react-native-community/geolocation';
+
+const {width, height} = Dimensions.get('window');
+
+const SCREEN_WIDTH = width;
+const SCREEN_HEIGHT = height;
+const ASPECT_RATIO = width / height;
+const LATITUDE_DELTA = 0.0922;
+const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
 export default class Map extends Component {
   constructor(props) {
@@ -57,16 +65,16 @@ export default class Map extends Component {
               this.mapRef = ref;
             }}
             initialRegion={{
-              latitude: 34.694,
-              longitude: 135.193,
+              latitude: 37.433,
+              longitude: -122.09,
               latitudeDelta: 0.0922,
               longitudeDelta: 0.0421,
             }}>
             {/* マップ上ピン打ち latitude, longitudeに座標*/}
             <Marker
               coordinate={{
-                latitude: 34.694,
-                longitude: 135.193,
+                latitude: this.state.latitude,
+                longitude: this.state.longitude,
               }}
               title="this is a marker"
               description="this is a marker example"
