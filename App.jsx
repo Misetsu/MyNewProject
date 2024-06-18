@@ -61,7 +61,7 @@ const TrackUserMapView = () => {
           style={StyleSheet.absoluteFillObject}
           initialRegion={initialRegion}>
           <Marker
-            coordinate={{
+            region={{
               latitude: position.latitude,
               longitude: position.longitude,
             }}>
