@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { SafeAreaView, View, Text, Dimensions, StyleSheet } from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {SafeAreaView, View, Text, Dimensions, StyleSheet} from 'react-native';
 
 import Geolocation from '@react-native-community/geolocation';
-import MapView, { Marker } from 'react-native-maps';
+import MapView, {Marker} from 'react-native-maps';
 
-const { width, height } = Dimensions.get('window');
+const {width, height} = Dimensions.get('window');
 const ASPECT_RATIO = width / height;
 const LATITUDE_DELTA = 0.01;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
@@ -43,7 +43,7 @@ const TrackUserMapView = () => {
       err => {
         setError(err.message);
       },
-      { enableHighAccuracy: true, timeout: 10000, distanceFilter: 1 },
+      {enableHighAccuracy: true, timeout: 10000, distanceFilter: 1},
     );
     return () => Geolocation.clearWatch(watchId);
   }, [initialRegion]);
@@ -61,7 +61,7 @@ const TrackUserMapView = () => {
           style={StyleSheet.absoluteFillObject}
           initialRegion={initialRegion}>
           <Marker
-            region={{
+            coordinate={{
               latitude: position.latitude,
               longitude: position.longitude,
             }}>
