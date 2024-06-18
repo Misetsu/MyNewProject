@@ -26,16 +26,14 @@ const TrackUserMapView = () => {
   useEffect(() => {
     const watchId = Geolocation.watchPosition(
       position => {
-        if (position && position.coords) {
-          setPosition(position.coords);
-          if (!initialRegion) {
-            setInitialRegion({
-              latitude: position.coords.latitude,
-              longitude: position.coords.longitude,
-              latitudeDelta: LATITUDE_DELTA,
-              longitudeDelta: LONGITUDE_DELTA,
-            });
-          }
+        setPosition(position.coords);
+        if (!initialRegion) {
+          setInitialRegion({
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+            latitudeDelta: LATITUDE_DELTA,
+            longitudeDelta: LONGITUDE_DELTA,
+          });
         } else {
           setError('Position or coords is undefined');
         }
@@ -59,7 +57,12 @@ const TrackUserMapView = () => {
         <MapView
           key={`${initialRegion.latitude}-${initialRegion.longitude}`}
           style={StyleSheet.absoluteFillObject}
-          initialRegion={initialRegion}>
+          region={{
+            latitude: position.latitude,
+            longitude: position.longitude,
+            latitudeDelta: LATITUDE_DELTA,
+            longitudeDelta: LONGITUDE_DELTA,
+          }}>
           <Marker
             coordinate={{
               latitude: position.latitude,
