@@ -19,7 +19,7 @@ export default class Map extends Component {
         latitude: 0,
         longitude: 0,
         latitudeDelta: 0,
-        longitudeDelta: 0
+        longitudeDelta: 0,
       },
       currentPosition: {
         latitude: 0, // 追加: 緯度の状態を保持する
@@ -28,25 +28,28 @@ export default class Map extends Component {
     };
   }
 
-  watchId = null
+  watchId = null;
 
   componentDidMount() {
-    Geolocation.getCurrentPosition((position) => {
-      var lat = position.coords.latitude;
-      var long = position.coords.longitude;
-      var initialRegion = {
-        latitude: lat,
-        longitude: long,
-        latitudeDelta: LATITUDE_DELTA,
-        longitudeDelta: LONGITUDE_DELTA,
-      }
+    Geolocation.getCurrentPosition(
+      position => {
+        var lat = position.coords.latitude;
+        var long = position.coords.longitude;
+        var initialRegion = {
+          latitude: lat,
+          longitude: long,
+          latitudeDelta: LATITUDE_DELTA,
+          longitudeDelta: LONGITUDE_DELTA,
+        };
 
-      this.setState({initialPosition: initialRegion})
-      this.setState({currentPosition: initialRegion})
-    }, (error) => alert(JSON.stringify(error)), 
-    {enableHighAccuracy: true, timeout: 10000},)
+        this.setState({initialPosition: initialRegion});
+        this.setState({currentPosition: initialRegion});
+      },
+      error => alert(JSON.stringify(error)),
+      {enableHighAccuracy: true, timeout: 10000},
+    );
 
-    this.watchId = Geolocation.watchPosition((position) => {
+    this.watchId = Geolocation.watchPosition(position => {
       var lat = position.coords.latitude;
       var long = position.coords.longitude;
       var lastRegion = {
@@ -54,15 +57,15 @@ export default class Map extends Component {
         longitude: long,
         latitudeDelta: LATITUDE_DELTA,
         longitudeDelta: LONGITUDE_DELTA,
-      }
+      };
 
-      this.setState({initialPosition: lastRegion})
-      this.setState({currentPosition: lastRegion})
-    })
+      this.setState({initialPosition: lastRegion});
+      this.setState({currentPosition: lastRegion});
+    });
   }
 
   componentWillUnmount() {
-    Geolocation.clearWatch(this.watchId)
+    Geolocation.clearWatch(this.watchId);
   }
 
   render() {
@@ -94,7 +97,7 @@ export default class Map extends Component {
             {/* マップ上ピン打ち latitude, longitudeに座標*/}
             <Marker coordinate={this.state.currentPosition}>
               <View style={styles.radius}>
-                <View style={styles.marker}/>
+                <View style={styles.marker} />
               </View>
             </Marker>
           </MapView>
@@ -108,21 +111,21 @@ const styles = StyleSheet.create({
   radius: {
     width: 50,
     height: 50,
-    borderRadius: 50/2,
+    borderRadius: 50 / 2,
     overflow: 'hidden',
     backgroundColor: 'rgba(0, 112, 255, 0.1)',
     borderWidth: 1,
     borderColor: 'rgba(0, 112, 255, 0.3)',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   marker: {
     width: 20,
     height: 20,
     borderWidth: 3,
     borderColor: 'white',
-    borderRadius: 20/2,
+    borderRadius: 20 / 2,
     overflow: 'hidden',
-    backgroundColor: '#007AFF'
-  }
-})
+    backgroundColor: '#007AFF',
+  },
+});
