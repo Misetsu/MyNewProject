@@ -1,10 +1,10 @@
-import React, {useState, useEffect} from 'react';
-import {SafeAreaView, View, Text, Dimensions, StyleSheet} from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { SafeAreaView, View, Text, Dimensions, StyleSheet } from 'react-native';
 
 import Geolocation from '@react-native-community/geolocation';
-import MapView, {Marker} from 'react-native-maps';
+import MapView, { Marker } from 'react-native-maps';
 
-const {width, height} = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 const ASPECT_RATIO = width / height;
 const LATITUDE_DELTA = 0.01;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
@@ -43,7 +43,7 @@ const TrackUserMapView = () => {
       err => {
         setError(err.message);
       },
-      {enableHighAccuracy: true, timeout: 10000, distanceFilter: 1},
+      { enableHighAccuracy: true, timeout: 10000, distanceFilter: 1 },
     );
     return () => Geolocation.clearWatch(watchId);
   }, [initialRegion]);
@@ -64,8 +64,11 @@ const TrackUserMapView = () => {
             coordinate={{
               latitude: position.latitude,
               longitude: position.longitude,
-            }}
-          />
+            }}>
+            <View style={styles.radius}>
+              <View style={styles.marker} />
+            </View>
+          </Marker>
           {/* Debug 用に coords オブジェクトを表示
           <View style={styles.debugContainer}>
             <Text>{`coords: {`}</Text>
@@ -81,6 +84,26 @@ const TrackUserMapView = () => {
 };
 
 const styles = StyleSheet.create({
+  radius: {
+    width: 50,
+    height: 50,
+    borderRadius: 50 / 2,
+    overflow: 'hidden',
+    backgroundColor: 'rgba(0, 112, 255, 0.1)',
+    borderWidth: 1,
+    borderColor: 'rgba(0, 112, 255, 0.3)',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  marker: {
+    width: 20,
+    height: 20,
+    borderWidth: 3,
+    borderColor: 'white',
+    borderRadius: 20 / 2,
+    overflow: 'hidden',
+    backgroundColor: '#007AFF',
+  },
   container: {
     width: '100%',
     height: '100%',
