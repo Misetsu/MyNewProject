@@ -26,9 +26,9 @@ export default class HelloWorldApp extends Component {  //コンポーネント�
   render() {  //render()メソッドは、そのコンポーネントがどのように描画されるかを定義する。
     return (
       <View style={styles.container}>
-        <Text style={styles.textEn}>NEWS</Text>
+        <Text style={styles.text}>NEWS</Text>
         <Text style={{ fontSize: 20 }}>{this.state.data}</Text>
-        <Text>お試し追加ですよ！！</Text>
+        <Text style={styles.textEn}>お試し追加ですよ！！</Text>
         <Button
                 title="現在地取得"
                 color="red"
@@ -47,15 +47,13 @@ const styles = StyleSheet.create({
   container:{
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'flex-end',
+    alignSelf:'flex-end',
   },
-  textEn:{
+  text:{
     fontSize: 30,
     fontWeight:'300',
     fontFamily: 'sans-serif-thin',
   },
-  textJa:{
-
-  }
 
 });
