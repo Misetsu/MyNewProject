@@ -5,9 +5,8 @@
  * @format
  */
 
-
 import React, { Component } from 'react';
-import { Text, View, Button } from 'react-native';
+import { Text, View, Button, StyleSheet } from 'react-native';
 
 
 export default class HelloWorldApp extends Component {  //コンポーネントは部品的な意味がある
@@ -20,39 +19,19 @@ export default class HelloWorldApp extends Component {  //コンポーネント�
       error: null      // 追加: エラーの状態を保持する
     };
   }
-
-  handlePress = () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        this.successCallback,
-        this.errorCallback
-      );
-    } else {
-      console.error("Geolocation is not supported by this browser/device.");
-    }
-  };
-
-  successCallback = (position) => {
-    const latitude = position.coords.latitude;
-    const longitude = position.coords.longitude;
-    this.setState({ 
-      latitude: latitude,
-      longitude: longitude,
-      data: `緯度: ${latitude}, 経度: ${longitude}`
-    });
-  };
   
+  
+
   
   render() {  //render()メソッドは、そのコンポーネントがどのように描画されるかを定義する。
     return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <Text>Hello, world!</Text>
+      <View style={styles.container}>
+        <Text style={styles.textEn}>NEWS</Text>
         <Text style={{ fontSize: 20 }}>{this.state.data}</Text>
         <Text>お試し追加ですよ！！</Text>
         <Button
                 title="現在地取得"
                 color="red"
-                onPress={this.handlePress}
             />
       </View>
     );
@@ -62,3 +41,21 @@ export default class HelloWorldApp extends Component {  //コンポーネント�
   }
   
 }
+
+//Stylesheet
+const styles = StyleSheet.create({
+  container:{
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  textEn:{
+    fontSize: 30,
+    fontWeight:'300',
+    fontFamily: 'sans-serif-thin',
+  },
+  textJa:{
+
+  }
+
+});
