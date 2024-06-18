@@ -49,7 +49,7 @@ const TrackUserMapView = () => {
   }, [initialRegion]);
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={StyleSheet.absoluteFillObject}>
       {error && (
         <View style={styles.errorContainer}>
           <Text style={styles.errorText}>{error}</Text>
@@ -58,7 +58,7 @@ const TrackUserMapView = () => {
       {initialRegion && (
         <MapView
           key={`${initialRegion.latitude}-${initialRegion.longitude}`}
-          style={styles.map}
+          style={StyleSheet.absoluteFillObject}
           initialRegion={initialRegion}>
           <Marker
             coordinate={{
@@ -66,14 +66,14 @@ const TrackUserMapView = () => {
               longitude: position.longitude,
             }}
           />
-          {/* Debug 用に coords オブジェクトを表示 */}
+          {/* Debug 用に coords オブジェクトを表示
           <View style={styles.debugContainer}>
             <Text>{`coords: {`}</Text>
             {Object.keys(position).map(key => {
               return <Text key={key}>{`  ${key} : ${position[key]}`}</Text>;
             })}
             <Text>{`}`}</Text>
-          </View>
+          </View> */}
         </MapView>
       )}
     </SafeAreaView>
